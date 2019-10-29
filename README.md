@@ -1,3 +1,3 @@
 # Udemy
 
-This repo is for Kevin's Udemy Courses.
+This repo includes of all of Kevin Capule's assignments and exercises done in Udemy

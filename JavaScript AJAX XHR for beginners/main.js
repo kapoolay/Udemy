@@ -1,6 +1,6 @@
 let firstNames = document.getElementById('firstNames');
 let output = document.getElementById('output');
-let btn = document.getElementById('button').addEventListener('click',loadData);
+let btn = document.getElementById('button').addEventListener('click',loadData);     // the function runs once the button is clicked
 
 let url = "https://randomuser.me/api/?results=5";                   // endpoint where JSON Data is sitting
 
@@ -24,7 +24,7 @@ function loadData() {                                               // function 
 
 function outputData(data) {                             // function that loops thru each element in the object/array
     for (let i = 0; i < data.length; i++) {             // that
-        console.log(data[i].picture.medium);            //  retrieves
+        console.log(data[i].picture.medium);            // retrieves
         let img = data[i].picture.medium;               // each medium picture and adding it to the HTML
         output.innerHTML += `                           
         <img src=${img}>

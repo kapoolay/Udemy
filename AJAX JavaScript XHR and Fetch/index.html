@@ -1,43 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html lang='en'>
+<html lang="en">
+
     <head>
-        <meta charset='utf-8'>
+        <meta charset="utf-8">
         <title>AJAX</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
     <body>
         <h1>Learn AJAX</h1>
-        <div id='output'></div>
-        <button id='loadNew' class='btn btn-primary'>Load</button> 
-
-
-
-        <script type='text/javascript'>
+        <div id="output"></div>
+        <button id="loadNew">Load</button>
         
-            let output = document.getElementById('output');
-            let buttonClick = document.getElementById('loadNew')
-
-            buttonClick.addEventListener('click', function() {
-                loadXHR();
+        <script type="text/javascript">
+            var output = document.getElementById('output');
+            var buttonClick = document.getElementById('loadNew')
+            buttonClick.addEventListener('click',function(){
+                loadAjax();
             })
-
-            function loadXHR() {
-                let xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // console.log('ready');
-                        let jsonData = JSON.parse(xhr.responseText);
-                        console.log(jsonData);
-                    }
+            function loadAjax(){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                //console.log('state changed',ajax.readyState,ajax.status)
+                if(ajax.readyState == 4 && ajax.status==200){
+                    // console.log(ajax.responseText)
+                    var json = JSON.parse(ajax.responseText);
+                    var data = json.results[0];
+            
+                    var message = '<h2>'+data.name.first + '  ' + data.name.last + '</h2><img src="'+data.picture.large +'">'
+                
+                    output.innerHTML = message;
                 }
-
-                xhr.open('GET', 'https://randomuser.me/api', true);
-                xhr.send();
-            }       
-
+            }
+            /*
+            ajax.onprogress =function(){
+                console.log('PROGRESS',ajax.readyState,ajax.status)
+            }
+            ajax.onload =function(){
+                console.log('DONE',ajax.readyState,ajax.status)
+            }
+            */
+            ajax.open('GET','https://randomuser.me/api/',true)
+            ajax.send();
+            }
+            
         </script>
     </body>
-
 </html>

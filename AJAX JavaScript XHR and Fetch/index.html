@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>AJAX</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <h1>Learn AJAX</h1>
+        <div id='output'></div>
+        <button id='loadNew' class='btn btn-primary'>Load</button> 
+
+
+
+        <script type='text/javascript'>
+        
+            let output = document.getElementById('output');
+            let buttonClick = document.getElementById('loadNew')
+
+            buttonClick.addEventListener('click', function() {
+                loadXHR();
+            })
+
+            function loadXHR() {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // console.log('ready');
+                        let jsonData = JSON.parse(xhr.responseText);
+                        console.log(jsonData);
+                    }
+                }
+
+                xhr.open('GET', 'https://randomuser.me/api', true);
+                xhr.send();
+            }       
+
+        </script>
+    </body>
+
+</html>

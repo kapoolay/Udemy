@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id='myBtn'><a href=''>Click Me</a></div>
+        <div id='output'></div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){               // makes sure the DOM has fully loaded before the jQuery is activated
+                $('#myBtn a').click(function(e) {
+                    let url = 'content.html';
+                    e.preventDefault();     // removes default action within the hyperlink
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataTypte: 'text',
+                        success: function(data) {   // adding a parameter allows you access to the object
+                            console.log(data);      // and you can console.log the data as well as other options
+                            $('#output').append('<br>It works'); 
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            $('#output').append('<br>'+data.statusText); 
+                        }
+                        
+                    })
+
+                    // $('#output').load(url, function(responseText,status,xhr) {
+                    //     console.log(responseText);      // loads the text within the web page - url
+                    //     console.log(status);            // logs whether the call was successful or not 
+                    //     console.log(xhr);               // returns back the entire call-back object 
+                    //     if(status === 'success') {
+                    //         $('#output').append('<br>It works');        // adds "It works" to the html if load is successful
+                    //     } else if (status === 'error') {
+                    //         $('#output').append('<br> Error');          // adds "Error" to the html if load fails
+                    //     } 
+                    // }); 
+
+                })
+            })
+
+
+
+        </script>
+
+    </body>
+</html>
+

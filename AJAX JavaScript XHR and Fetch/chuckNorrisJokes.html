@@ -13,21 +13,34 @@
         <button id="trigger">Get a Joke</button>
         
         <script type="text/javascript">
-            let output = document.querySelector('#output');
             let joker = document.querySelector('#trigger');
             joker.addEventListener('click', loadJoke);
 
             function loadJoke() {
-                let ajax = new XMLHttpRequest();
-                ajax.onreadystatechange = function() {
-                    if (ajax.readyState === 4 && ajax.status === 200) {
-                        let json = JSON.parse(ajax.responseText);
-                        let html = '<div><img src="'+json.icon_url+'">'+json.value+ '</div>';
-                        output.innerHTML = html;
-                    }
+                let url = 'https://api.chucknorris.io/jokes/random';
+
+                fetch('https://api.chucknorris.io/jokes/random')
+                    .then(resJSON)
+                    .then(json => document.querySelector('#output').innerHTML = '<div><img src="'+json.icon_url+'">'+json.value+'</div>')
+                    .catch(err);
+
+
+                function resJSON(response) {
+                    return response.json();
                 }
-                ajax.open('GET','https://api.chucknorris.io/jokes/random',true);
-                ajax.send();
+
+                function err(error) {
+                    console.log(error);
+                }
+
+
+              /*
+              fetch('test.txt').then(function(response) {
+                  return response.text();
+              }).then(function(text) {
+                  console.log(text);
+              })
+              */
             };
         </script>
     </body>

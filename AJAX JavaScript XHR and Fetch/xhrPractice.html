@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>AJAX</title>
+    </head>
+
+    <body>
+        <h1>Learn AJAX</h1>
+        <div id="output"></div>
+        <button id="loadNew">Load</button>
+        
+
+
+        
+        <script type="text/javascript">
+            let output = document.getElementById('output');
+            let clickBtn = document.getElementById('loadNew').addEventListener('click', function() {
+                loadAjax();
+            })
+
+            function loadAjax() {
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        output.innerHTML = xhr.responseText;
+                    }
+                }
+                xhr.open('GET', 'simple.txt', true);
+                xhr.send(); 
+            };
+        </script>
+    </body>
+</html>
